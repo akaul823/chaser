@@ -19,7 +19,10 @@ obstacle_color = (255, 0, 0)  # Red
 obstacle_rect = pygame.Rect(screen_width - 150, screen_height - 150, 50, 100)  # x, y, width, height
 
 # Obstacle movement speed
-obstacle_speed = 1
+obstacle_speed = 5
+
+# Create a clock object
+clock = pygame.time.Clock()
 
 # Main game loop
 running = True
@@ -50,6 +53,7 @@ while running:
     # Check for collisions
     if player_rect.colliderect(obstacle_rect):
         print("Collision!")
+    clock.tick(60) 
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
