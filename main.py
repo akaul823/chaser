@@ -14,7 +14,7 @@ class Game:
         self.collision_sprites = pygame.sprite.Group()
 
         #scale factor
-        bg_height = pygame.image.load("graphics/environment/background.png").get_height()
+        bg_height = pygame.image.load("graphics/environment/simple.png").get_height()
         self.scale_factor = WINDOW_HEIGHT / bg_height
 
         #sprite setup
@@ -35,6 +35,8 @@ class Game:
 
 
             #game logic
+            self.display_surface.fill('purple')
+            self.all_sprites.update(dt)
             self.all_sprites.draw(self.display_surface)
             pygame.display.update()
             self.clock.tick(FRAMERATE)
