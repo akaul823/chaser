@@ -1,6 +1,6 @@
 import pygame, sys, time
 from settings import *
-from sprites import BackGround, Ground
+from sprites import BackGround, Ground, Plane
 
 class Game:
     def __init__(self):
@@ -20,6 +20,7 @@ class Game:
         #sprite setup
         BackGround(self.all_sprites, self.scale_factor)
         Ground(self.all_sprites, self.scale_factor)
+        Plane(self.all_sprites, self.scale_factor)
 
 
     def run(self):
