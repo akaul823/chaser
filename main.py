@@ -20,12 +20,13 @@ class Game:
         #sprite setup
         BackGround(self.all_sprites, self.scale_factor)
         Ground(self.all_sprites, self.scale_factor)
-        Plane(self.all_sprites, self.scale_factor)
+        self.plane = Plane(self.all_sprites, self.scale_factor)
 
 
     def run(self):
         last_time = time.time()
         while True:
+
             #delta time
             dt = time.time() - last_time
             last_time = time.time()
@@ -35,7 +36,9 @@ class Game:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        self.plane.jump()
 
             #game logic
             self.display_surface.fill('purple')

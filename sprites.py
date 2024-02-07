@@ -68,6 +68,8 @@ class Plane(pygame.sprite.Sprite):
         self.rect.y = round(self.pos.y)
 
 
+    def jump(self):
+        self.direction = -400
 
     def update(self, dt):
         self.apply_gravity(dt)
