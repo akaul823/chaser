@@ -1,6 +1,6 @@
 import pygame, sys, time
 from settings import *
-from sprites import BackGround, Ground, Plane
+from sprites import BackGround, Ground, Plane, Obstacle
 
 class Game:
     def __init__(self):
@@ -22,6 +22,9 @@ class Game:
         Ground(self.all_sprites, self.scale_factor)
         self.plane = Plane(self.all_sprites, self.scale_factor)
 
+        #timer
+        self.obstacle_timer = pygame.USEREVENT + 1
+        pygame.time.set_timer(self.obstacle_timer, 1400)
 
     def run(self):
         last_time = time.time()
@@ -39,6 +42,8 @@ class Game:
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
                         self.plane.jump()
+                if event.type == self.obstacle_timer:
+                    Obstacle(self.all_sprites, self.scale_factor)
 
             #game logic
             self.display_surface.fill('purple')
