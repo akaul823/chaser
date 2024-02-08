@@ -19,7 +19,8 @@ class Game:
 
         #sprite setup
         BackGround(self.all_sprites, self.scale_factor)
-        Ground(self.all_sprites, self.scale_factor)
+        Ground(self.all_sprites, self.scale_factor, "bottom")
+        Ground(self.all_sprites, self.scale_factor * 2, "top")
         self.plane = Plane(self.all_sprites, self.scale_factor)
 
         #timer
