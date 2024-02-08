@@ -31,19 +31,27 @@ class Game:
         #text
         self.font = pygame.font.Font("graphics/font/font.ttf",30)
         self.score = 0
+        self.start_offset = 0
 
         #menu
         self.menu_surf = pygame.image.load("graphics/menu.png").convert_alpha()
         self.menu_rect = self.menu_surf.get_rect(center = (WINDOW_WIDTH / 2, WINDOW_HEIGHT /3))
+
+        #music
+        self.music = pygame.mixer.Sound("graphics/sounds/free.mp3")
+        self.music.play(loops = -1)
     
     def collisions(self):
         if pygame.sprite.spritecollide(self.plane, self.collision_sprites,False, pygame.sprite.collide_mask):
+            for sprite in self.collision_sprites.sprites():
+                if sprite.sprite_type == 'obstacle':
+                    sprite.kill()
             self.active = False
             self.plane.kill()
 
     def display_score(self):
         if self.active:
-            self.score = pygame.time.get_ticks() // 1000
+            self.score = (pygame.time.get_ticks()- self.start_offset) // 1000
             y = WINDOW_HEIGHT / 10
         else:
             y = WINDOW_HEIGHT / 2 + (self.menu_rect.height/1.5)
@@ -72,7 +80,8 @@ class Game:
                         else:
                             self.plane = Plane(self.all_sprites, self.scale_factor)
                             self.active = True
-                if event.type == self.obstacle_timer:
+                            self.start_offset = pygame.time.get_ticks()
+                if event.type == self.obstacle_timer and self.active:
                     Obstacle([self.all_sprites,self.collision_sprites], self.scale_factor*1.1)
 
             #game logic

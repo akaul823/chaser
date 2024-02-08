@@ -29,7 +29,7 @@ class Ground(pygame.sprite.Sprite):
         super().__init__(groups)
         ground_surf = pygame.image.load("graphics/environment/ground.png").convert_alpha()
         self.image = pygame.transform.scale(ground_surf, pygame.math.Vector2(ground_surf.get_size())*scale_factor)
-
+        self.sprite_type = "ground"
         # self.rect = self.image.get_rect(bottomleft = (0,WINDOW_HEIGHT))
         if position == 'top':
             self.image = pygame.transform.flip(self.image, False, True)  # Flip the image vertically
@@ -64,6 +64,9 @@ class Plane(pygame.sprite.Sprite):
 
         self.mask = pygame.mask.from_surface(self.image)
 
+        self.jump_sound = pygame.mixer.Sound('graphics/sounds/jump.wav')
+        self.jump_sound.set_volume(0.1)
+
     def import_frames(self,scale_factor):
         self.frames = []
         for i in range(3):
@@ -78,7 +81,9 @@ class Plane(pygame.sprite.Sprite):
 
 
     def jump(self):
+        self.jump_sound.play()
         self.direction = -400
+
     
     def animate(self, dt):
         self.frame_index += 13 * dt
@@ -104,6 +109,7 @@ class Obstacle(pygame.sprite.Sprite):
         orientation = choice(('up','down'))
         surf = pygame.image.load(f'graphics/obstacles/{choice((0,1))}.png').convert_alpha()
         self.image = pygame.transform.scale(surf,pygame.math.Vector2(surf.get_size())*scale_factor*2) 
+        self.sprite_type = "obstacle"
 
         x = WINDOW_WIDTH + randint(40,100)
         if orientation == 'up':
