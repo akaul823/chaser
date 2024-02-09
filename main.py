@@ -23,7 +23,7 @@ class Game:
         BackGround(self.all_sprites, self.scale_factor)
         Ground([self.all_sprites, self.collision_sprites], self.scale_factor * 1.3, "bottom")
         Ground([self.all_sprites, self.collision_sprites], self.scale_factor * 2, "top")
-        self.plane = Plane(self.all_sprites, self.scale_factor*0.3)
+        self.plane = Plane(self.all_sprites, self.scale_factor*0.2)
 
         # Timer for obstacle generation
         self.obstacle_timer = pygame.USEREVENT + 1
@@ -93,7 +93,7 @@ class Game:
                             # Allow jumping only when the game is in the 'PLAYING' state and active
                             self.plane.jump()
                         else:
-                            self.plane = Plane(self.all_sprites, self.scale_factor*0.3)
+                            self.plane = Plane(self.all_sprites, self.scale_factor*0.2)
                             self.active = True
                             self.start_offset = pygame.time.get_ticks()
                 if event.type == self.obstacle_timer and self.active:
