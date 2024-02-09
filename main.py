@@ -6,7 +6,7 @@ class Game:
     def __init__(self):
         pygame.init()
         self.display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
-        pygame.display.set_caption('Chaser')
+        pygame.display.set_caption('chaser')
         self.clock = pygame.time.Clock()
         self.active = False  # Start with no movement, waiting for game start
         self.state = 'START_MENU'  # Initial game state is the start menu
@@ -43,13 +43,23 @@ class Game:
         self.music.play(loops=-1)
 
     def display_start_screen(self):
+        
+        # Load the background image
+        background_image = pygame.image.load('graphics/environment/simple.png').convert()  # Update the path to your image
+        # Scale the image to fit the screen
+        background_image = pygame.transform.scale(background_image, (WINDOW_WIDTH, WINDOW_HEIGHT))
+    
+        # Blit the background image
+        self.display_surface.blit(background_image, (0, 0))
         # Display the game title and "Press Spacebar to Start" instructions
+        # self.display_surface.fill('red')
         title_surf = self.font.render("chaser", True, 'black')
         title_rect = title_surf.get_rect(center=(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4))
         instructions_surf = self.font.render("Press Spacebar", True, 'black')
         instructions_rect = instructions_surf.get_rect(center=(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2))
         self.display_surface.blit(title_surf, title_rect)
         self.display_surface.blit(instructions_surf, instructions_rect)
+
 
     def collisions(self):
         # Collision detection between the plane and obstacles
@@ -77,12 +87,12 @@ class Game:
             dt = time.time() - last_time  # Calculate delta time for frame-independent movement
             last_time = time.time()
 
-                    # Event loop
+            # Event loop
             for event in pygame.event.get():
                 if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and event.key == pygame.K_q:
                     pygame.quit()
                     sys.exit()
-                if event.type == pygame.KEYDOWN:        
+                if event.type == pygame.KEYDOWN:       
                     if event.key == pygame.K_SPACE:
                         if self.state == 'START_MENU':
                             # Start the game from the start menu
@@ -100,7 +110,6 @@ class Game:
                     # Generate a new obstacle
                     Obstacle([self.all_sprites, self.collision_sprites], self.scale_factor * 1.1)
 
-            self.display_surface.fill('red')
 
             if self.state == 'START_MENU':
                 self.display_start_screen()  # Display the start screen
@@ -112,7 +121,8 @@ class Game:
                        
                 if self.active:
                     self.collisions()
-                else: self.display_surface.blit(self.menu_surf, self.menu_rect)
+                else: 
+                    self.display_surface.blit(self.menu_surf, self.menu_rect)
 
             pygame.display.update()
             self.clock.tick(FRAMERATE)
