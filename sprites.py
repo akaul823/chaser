@@ -108,7 +108,7 @@ class Obstacle(pygame.sprite.Sprite):
 
         orientation = choice(('up','down'))
         surf = pygame.image.load(f'graphics/obstacles/{choice((0,1))}.png').convert_alpha()
-        self.image = pygame.transform.scale(surf,pygame.math.Vector2(surf.get_size())*scale_factor*2) 
+        self.image = pygame.transform.scale(surf,pygame.math.Vector2(surf.get_size())*scale_factor*2.1) 
         self.sprite_type = "obstacle"
 
         x = WINDOW_WIDTH + randint(40,100)
