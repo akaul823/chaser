@@ -123,6 +123,7 @@ class Game:
                             self.plane = Plane(self.all_sprites, self.scale_factor*0.25)
                             self.active = True
                             self.start_offset = pygame.time.get_ticks()
+            
                 if event.type == self.obstacle_timer and self.active:
                     # Generate a new obstacle
                     Obstacle([self.all_sprites, self.collision_sprites], self.scale_factor * 1.1)
