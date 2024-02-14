@@ -10,6 +10,7 @@ class Game:
         self.clock = pygame.time.Clock()
         self.active = False  # Start with no movement, waiting for game start
         self.state = 'START_MENU'  # Initial game state is the start menu
+        self.obstacles_passed = 0
 
         # Sprite groups
         self.all_sprites = pygame.sprite.Group()
@@ -79,10 +80,17 @@ class Game:
             self.active = False  # Stop game movement
             self.plane.kill()  # Remove the plane sprite
 
+    def update_obstacles_passed(self):
+        for sprite in self.collision_sprites:
+            if getattr(sprite, 'sprite_type', None) == 'obstacle' and sprite.rect.right < self.plane.rect.left and not sprite.passed:
+                self.obstacles_passed += 1
+                sprite.passed = True
+
     def display_score(self):
         # Display the current score or final score based on game state
         if self.active:
-            self.score = (pygame.time.get_ticks() - self.start_offset) // 1000
+            time = (pygame.time.get_ticks() - self.start_offset) // 1000
+            self.score = time + self.obstacles_passed * 5
             y = WINDOW_HEIGHT / 10
         else:
             y = WINDOW_HEIGHT / 2 + (self.menu_rect.height / 1.5)
@@ -125,6 +133,7 @@ class Game:
             elif self.state == 'PLAYING':
                 # Update and draw sprites, display score, and handle collisions
                 self.all_sprites.update(dt)
+                self.update_obstacles_passed() 
                 self.all_sprites.draw(self.display_surface)
                 self.display_score()
                        
