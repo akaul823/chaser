@@ -1,7 +1,7 @@
 # chaser
 
 ### About
-Navigate a daring plane through the narrowing caves and dodge the relentless obstacles that come your way. With each close call and obstacle surpassed, your score soars. How long can you keep the chase going?
+Navigate a daring plane through the narrowing caves and dodge the relentless obstacles that come your way. With each close call and obstacle surpassed, your score increases. How long can you keep the chase going?
 
 ### Getting Started
 
