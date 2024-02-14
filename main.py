@@ -30,7 +30,7 @@ class Game:
         pygame.time.set_timer(self.obstacle_timer, 1400)
 
         # Setup for displaying text (score and instructions)
-        self.font = pygame.font.Font("graphics/font/font.ttf", 30)
+        self.font = pygame.font.Font("graphics/font/font.ttf", 27)
         self.menu_font = pygame.font.Font("graphics/font/font.ttf", 20) 
         self.score = 0
         self.start_offset = 0
@@ -39,9 +39,13 @@ class Game:
         # self.menu_surf = pygame.image.load("graphics/menu.png").convert_alpha()
         # self.menu_rect = self.menu_surf.get_rect(center=(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 3))
         # Main menu setup with text instead of an image
-        menu_text = "Press Spacebar to Continue"
+        menu_text = "Press Spacebar to Try Again"
+        menu_text_quit = "Press Q to Quit"
         self.menu_surf = self.menu_font.render(menu_text, True, (0, 0, 0))  # White color text
-        self.menu_rect = self.menu_surf.get_rect(center=(WINDOW_WIDTH/2, WINDOW_HEIGHT / 3))
+        self.menu_rect = self.menu_surf.get_rect(center=(WINDOW_WIDTH/2, WINDOW_HEIGHT / 4))
+        #For Quit
+        self.menu_surf_q = self.menu_font.render(menu_text_quit, True, (0, 0, 0))  # White color text
+        self.menu_q_rect = self.menu_surf_q.get_rect(center=(WINDOW_WIDTH/2, WINDOW_HEIGHT / 3))
 
         # Background music setup
         self.music = pygame.mixer.Sound("graphics/sounds/free.mp3")
@@ -60,7 +64,7 @@ class Game:
         # self.display_surface.fill('red')
         title_surf = self.font.render("chaser", True, 'black')
         title_rect = title_surf.get_rect(center=(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4))
-        instructions_surf = self.font.render("Press Spacebar", True, 'black')
+        instructions_surf = self.font.render("Press Spacebar to Begin", True, 'black')
         instructions_rect = instructions_surf.get_rect(center=(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2))
         self.display_surface.blit(title_surf, title_rect)
         self.display_surface.blit(instructions_surf, instructions_rect)
@@ -128,6 +132,7 @@ class Game:
                     self.collisions()
                 else: 
                     self.display_surface.blit(self.menu_surf, self.menu_rect)
+                    self.display_surface.blit(self.menu_surf_q,self.menu_q_rect)
 
             pygame.display.update()
             self.clock.tick(FRAMERATE)
