@@ -142,6 +142,7 @@ class Game:
                 else: 
                     self.display_surface.blit(self.menu_surf, self.menu_rect)
                     self.display_surface.blit(self.menu_surf_q,self.menu_q_rect)
+                    self.obstacles_passed = 0
 
             pygame.display.update()
             self.clock.tick(FRAMERATE)
