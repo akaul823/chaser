@@ -31,12 +31,17 @@ class Game:
 
         # Setup for displaying text (score and instructions)
         self.font = pygame.font.Font("graphics/font/font.ttf", 30)
+        self.menu_font = pygame.font.Font("graphics/font/font.ttf", 20) 
         self.score = 0
         self.start_offset = 0
 
         # Main menu setup
-        self.menu_surf = pygame.image.load("graphics/menu.png").convert_alpha()
-        self.menu_rect = self.menu_surf.get_rect(center=(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 3))
+        # self.menu_surf = pygame.image.load("graphics/menu.png").convert_alpha()
+        # self.menu_rect = self.menu_surf.get_rect(center=(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 3))
+        # Main menu setup with text instead of an image
+        menu_text = "Press Spacebar to Continue"
+        self.menu_surf = self.menu_font.render(menu_text, True, (0, 0, 0))  # White color text
+        self.menu_rect = self.menu_surf.get_rect(center=(WINDOW_WIDTH/2, WINDOW_HEIGHT / 3))
 
         # Background music setup
         self.music = pygame.mixer.Sound("graphics/sounds/free.mp3")
