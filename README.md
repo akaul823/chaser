@@ -16,4 +16,5 @@ Navigate to the root directory and kickstart the game with:
 Tweak the game settings in settings.py to adjust difficulty, change game dynamics, or even give the game a new look.
 
 ### Demo:
-Coming soon...
+[Click Me](https://www.youtube.com/watch?v=ePU4Ua_SVig "Video Title")
+
